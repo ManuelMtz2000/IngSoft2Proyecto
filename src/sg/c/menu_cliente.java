@@ -12,7 +12,6 @@ package sg.c;
  */
 public class menu_cliente extends javax.swing.JFrame {
 
-    public static int mode = 0; 
     public menu_cliente() {
         initComponents();
         ///Definimos n titulo para la ventana
@@ -142,16 +141,14 @@ public class menu_cliente extends javax.swing.JFrame {
 
     private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
         // Eliminar cliente
-        mode = 1;
-        buscador_cliente nuevo = new buscador_cliente();
+        buscador_cliente nuevo = new buscador_cliente(2);
         nuevo.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jLabel3MouseClicked
 
     private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
         // Modificar
-        mode = 2;
-        buscador_cliente nuevo = new buscador_cliente();
+        buscador_cliente nuevo = new buscador_cliente(1);
         nuevo.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jLabel4MouseClicked
