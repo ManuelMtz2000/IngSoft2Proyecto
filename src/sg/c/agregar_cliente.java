@@ -1,6 +1,8 @@
 
 package sg.c;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 
 public class agregar_cliente extends javax.swing.JFrame {
@@ -11,6 +13,7 @@ public class agregar_cliente extends javax.swing.JFrame {
         this.setTitle("Agregar clientes");
         ///Colocamos la ventana en medio de la panatalla
         this.setLocationRelativeTo(null);
+        this.setResizable(false);
     }
 
     @SuppressWarnings("unchecked")
@@ -110,7 +113,7 @@ public class agregar_cliente extends javax.swing.JFrame {
         getContentPane().add(jtSex, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 290, 90, 30));
 
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/fondo.jpg"))); // NOI18N
-        jLabel7.setText("jLabel7");
+        jLabel7.setText("dd");
         getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         pack();
@@ -124,7 +127,7 @@ public class agregar_cliente extends javax.swing.JFrame {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // Validamos que no esten vacios
-        if (jtName.getText().isEmpty() || jtLast.getText().isEmpty() || jtAge.getSelectedIndex() == 0 || jtBlood.getSelectedIndex() == 0 || jtSex.getSelectedIndex() == 0) {
+        if (jtName.getText().isEmpty() || jtLast.getText().isEmpty() || jtAge.getSelectedIndex() == 0|| jtBlood.getSelectedIndex() == 0 || jtSex.getSelectedIndex() == 0) {
             JOptionPane.showMessageDialog(null, "Campos incompletos");
         } else {
             ///Definimos variables
@@ -135,7 +138,7 @@ public class agregar_cliente extends javax.swing.JFrame {
             name = jtName.getText();
             last = jtLast.getText();
             blood = jtBlood.getSelectedItem().toString();
-            age = Integer.parseInt(jtAge.getSelectedItem().toString());
+            age = jtAge.getSelectedIndex();
             if (jtSex.getSelectedItem().toString().equals("Masculino")) {
                 sex = "M";
             } else {

@@ -15,6 +15,7 @@ public class modificar_sucursal extends javax.swing.JFrame {
         this.setTitle("Modificar sucursal");
         ///Colocamos la ventana en medio de la panatalla
         this.setLocationRelativeTo(null);
+        this.setResizable(false);
         this.user = user;
         rellenarDatos();
     }

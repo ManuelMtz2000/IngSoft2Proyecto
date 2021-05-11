@@ -14,6 +14,7 @@ public class buscador_usuario extends javax.swing.JFrame {
         this.setTitle("Buscar usuario");
         ///Colocamos la ventana en medio de la panatalla
         this.setLocationRelativeTo(null);
+        this.setResizable(false);
     }
 
     @SuppressWarnings("unchecked")

@@ -4,7 +4,6 @@ package sg.c;
 import java.sql.*;
 import conexion.conexion;
 import javax.swing.JOptionPane;
-import static sg.c.buscador_cliente.user_id;
 
 public class Cliente {
     

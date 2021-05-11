@@ -73,29 +73,33 @@ public class buscador_cliente extends javax.swing.JFrame {
         if (jtUser.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Ingrese un ID");
         } else {
-            switch (mode) {
-                case 1: {
-                    Cliente c = new Cliente();
-                    int buscador = c.Search(Integer.parseInt(jtUser.getText()));
-                    if (buscador != -1) {
-                        modificar_cliente mc = new modificar_cliente(c.Search(Integer.parseInt(jtUser.getText())));
-                        mc.setVisible(true);
-                        this.dispose();
+            if(!isNumeric(jtUser.getText())) {
+                JOptionPane.showMessageDialog(null,"Ingrese un elemento valido");
+            } else {
+                switch (mode) {
+                    case 1: {
+                        Cliente c = new Cliente();
+                        int buscador = c.Search(Integer.parseInt(jtUser.getText()));
+                        if (buscador != -1) {
+                            modificar_cliente mc = new modificar_cliente(c.Search(Integer.parseInt(jtUser.getText())));
+                            mc.setVisible(true);
+                            this.dispose();
+                        }
+                        break;
                     }
-                    break;
+                    case 2: {
+                        Cliente c = new Cliente();
+                        int estatus = 0, delete = 1, search = Integer.parseInt(jtUser.getText());
+                        c.Delete(estatus, search, delete);
+                        menu_cliente nuevo = new menu_cliente();
+                        nuevo.setVisible(true);
+                        this.dispose();
+                        break;
+                    }
+                    default:
+                        JOptionPane.showMessageDialog(null, "error");
+                        break;
                 }
-                case 2: {
-                    Cliente c = new Cliente();
-                    int estatus = 0, delete = 1, search = Integer.parseInt(jtUser.getText());
-                    c.Delete(estatus, search, delete);
-                    menu_cliente nuevo = new menu_cliente();
-                    nuevo.setVisible(true);
-                    this.dispose();
-                    break;
-                }
-                default:
-                    JOptionPane.showMessageDialog(null, "error");
-                    break;
             }
         }
     }//GEN-LAST:event_jLabel3MouseClicked
@@ -106,6 +110,15 @@ public class buscador_cliente extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    public boolean isNumeric(String cadena){
+        try{
+            Integer.parseInt(cadena);
+            return true;
+        } catch(NumberFormatException e){
+            return false;
+        }
+    }
+    
     public static void main(String args[]) {
 
         java.awt.EventQueue.invokeLater(() -> {

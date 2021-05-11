@@ -9,6 +9,7 @@ public class menu_cliente extends javax.swing.JFrame {
         this.setTitle("Menu cliente");
         ///Colocamos la ventana en medio de la panatalla
         this.setLocationRelativeTo(null);
+        this.setResizable(false);
     }
 
     @SuppressWarnings("unchecked")

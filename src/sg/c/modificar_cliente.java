@@ -15,6 +15,7 @@ public class modificar_cliente extends javax.swing.JFrame {
         ///Colocamos la ventana en medio de la panatalla
         this.setLocationRelativeTo(null);
         this.id = id;
+        this.setResizable(false);
         actualizar_datos();
     }
     public void actualizar_datos(){

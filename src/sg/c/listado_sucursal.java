@@ -14,6 +14,7 @@ public class listado_sucursal extends javax.swing.JFrame {
         this.setTitle("Listado sucursal");
         ///Colocamos la ventana en medio de la panatalla
         this.setLocationRelativeTo(null);
+        this.setResizable(false);
         mostrarDatos();
     }
     public void mostrarDatos(){

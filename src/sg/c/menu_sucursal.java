@@ -10,6 +10,7 @@ public class menu_sucursal extends javax.swing.JFrame {
         this.setTitle("Menu sucursal");
         ///Colocamos la ventana en medio de la panatalla
         this.setLocationRelativeTo(null);
+        this.setResizable(false);
     }
 
     @SuppressWarnings("unchecked")

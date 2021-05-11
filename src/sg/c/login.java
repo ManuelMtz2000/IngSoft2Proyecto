@@ -15,6 +15,7 @@ public class login extends javax.swing.JFrame {
         this.setTitle("Inicio de sesión");
         ///Colocamos la ventana en medio de la panatalla
         this.setLocationRelativeTo(null);
+        this.setResizable(false);
     }
 
     @SuppressWarnings("unchecked")

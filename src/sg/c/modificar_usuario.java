@@ -14,6 +14,7 @@ public class modificar_usuario extends javax.swing.JFrame {
         this.setTitle("Editar usuario");
         ///Colocamos la ventana en medio de la panatalla
         this.setLocationRelativeTo(null);
+        this.setResizable(false);
         rellenarComboBox();
         rellenarDatos();
 
@@ -64,7 +65,6 @@ public class modificar_usuario extends javax.swing.JFrame {
                     ResultSet rs1 = ps.executeQuery();
                     if (rs1.next()) {
                         String suc = rs1.getString("direccion");
-                        JOptionPane.showMessageDialog(null, suc);
                         for (int i = 0; i < jComboBox1.getItemCount(); i++) {
                             jComboBox1.setSelectedIndex(i);
                             opcion = jComboBox1.getSelectedItem().toString();

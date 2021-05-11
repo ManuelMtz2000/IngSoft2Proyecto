@@ -13,6 +13,7 @@ public class buscador_sucursal extends javax.swing.JFrame {
         this.setTitle("Buscar sucursal");
         ///Colocamos la ventana en medio de la panatalla
         this.setLocationRelativeTo(null);
+        this.setResizable(false);
     }
 
     @SuppressWarnings("unchecked")

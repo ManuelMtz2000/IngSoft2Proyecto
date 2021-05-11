@@ -13,6 +13,7 @@ public class agregar_usuario extends javax.swing.JFrame {
         this.setTitle("Agregar usuario");
         ///Colocamos la ventana en medio de la panatalla
         this.setLocationRelativeTo(null);
+        this.setResizable(false);
         this.rellenarSucursales();
     }
     public void rellenarSucursales(){

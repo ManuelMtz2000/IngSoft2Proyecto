@@ -11,6 +11,7 @@ public class agregar_sucursal extends javax.swing.JFrame {
         this.setTitle("Agregar sucursal");
         ///Colocamos la ventana en medio de la panatalla
         this.setLocationRelativeTo(null);
+        this.setResizable(false);
         
     }
 

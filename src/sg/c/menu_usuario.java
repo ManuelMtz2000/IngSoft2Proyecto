@@ -10,6 +10,7 @@ public class menu_usuario extends javax.swing.JFrame {
         this.setTitle("Menu usuario");
         ///Colocamos la ventana en medio de la panatalla
         this.setLocationRelativeTo(null);
+        this.setResizable(false);
     }
 
     @SuppressWarnings("unchecked")
