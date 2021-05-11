@@ -100,6 +100,7 @@ public class buscador_sucursal extends javax.swing.JFrame {
                 String buscador = s.Search(jtName.getText());
                 if(!buscador.equals("n")){
                     new modificar_sucursal(jtName.getText()).setVisible(true);
+                    this.dispose();
                 }
             } else if(mode == 2){
                 Sucursal s = new Sucursal();
