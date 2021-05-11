@@ -1,8 +1,6 @@
 
 package sg.c;
 
-import java.sql.*;
-import conexion.conexion;
 import javax.swing.JOptionPane;
 
 public class buscador_cliente extends javax.swing.JFrame {
@@ -13,9 +11,9 @@ public class buscador_cliente extends javax.swing.JFrame {
     public buscador_cliente(int type) {
         initComponents();
         ///Definimos un titulo para la ventana
-        setTitle("Buscar clíentes");
+        this.setTitle("Buscar clíentes");
         ///Colocamos la ventana en medio de la panatalla
-        setLocationRelativeTo(null);
+        this.setLocationRelativeTo(null);
         this.setResizable(false);
         mode = type;
     }
@@ -28,7 +26,6 @@ public class buscador_cliente extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jtUser = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
 
@@ -55,16 +52,6 @@ public class buscador_cliente extends javax.swing.JFrame {
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 260, -1, -1));
         getContentPane().add(jtUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 260, 300, 30));
 
-        jButton1.setBackground(new java.awt.Color(255, 51, 51));
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("Salir");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 410, 110, 30));
-
         jButton2.setBackground(new java.awt.Color(51, 51, 255));
         jButton2.setForeground(new java.awt.Color(255, 255, 255));
         jButton2.setText("Regresar al menu");
@@ -83,28 +70,34 @@ public class buscador_cliente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
-        if(jtUser.getText().isEmpty()){
-           JOptionPane.showMessageDialog(null,"Ingrese un ID");
-       }else{
-            if(mode == 1) {
-                Cliente c = new Cliente();
-                int buscador = c.Search(Integer.parseInt(jtUser.getText()));
-                if(buscador != -1){
-                    modificar_cliente mc = new modificar_cliente(c.Search(Integer.parseInt(jtUser.getText())));
-                    mc.setVisible(true);
-                    this.dispose();
+        if (jtUser.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Ingrese un ID");
+        } else {
+            switch (mode) {
+                case 1: {
+                    Cliente c = new Cliente();
+                    int buscador = c.Search(Integer.parseInt(jtUser.getText()));
+                    if (buscador != -1) {
+                        modificar_cliente mc = new modificar_cliente(c.Search(Integer.parseInt(jtUser.getText())));
+                        mc.setVisible(true);
+                        this.dispose();
+                    }
+                    break;
                 }
-            } else if(mode == 2){
-                Cliente c = new Cliente();
-                int estatus = 0, delete = 1, search = Integer.parseInt(jtUser.getText());
-                c.Delete(estatus, search, delete);
-                menu_cliente nuevo = new menu_cliente();
-                nuevo.setVisible(true);
-                this.dispose();
-            } else {
-                JOptionPane.showMessageDialog(null,"error");
+                case 2: {
+                    Cliente c = new Cliente();
+                    int estatus = 0, delete = 1, search = Integer.parseInt(jtUser.getText());
+                    c.Delete(estatus, search, delete);
+                    menu_cliente nuevo = new menu_cliente();
+                    nuevo.setVisible(true);
+                    this.dispose();
+                    break;
+                }
+                default:
+                    JOptionPane.showMessageDialog(null, "error");
+                    break;
             }
-       }
+        }
     }//GEN-LAST:event_jLabel3MouseClicked
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -113,48 +106,14 @@ public class buscador_cliente extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        ///Cerrar programa
-        System.exit(0);
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(buscador_cliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(buscador_cliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(buscador_cliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(buscador_cliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new buscador_cliente(0).setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new buscador_cliente(0).setVisible(true);
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

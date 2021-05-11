@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
 package sg.c;
 
@@ -16,64 +11,61 @@ public class modificar_cliente extends javax.swing.JFrame {
     public modificar_cliente(int id) {
         initComponents();
         ///Definimos un titulo para la ventana
-        setTitle("Modificar clíentes");
+        this.setTitle("Modificar clíentes");
         ///Colocamos la ventana en medio de la panatalla
-        setLocationRelativeTo(null);
+        this.setLocationRelativeTo(null);
         this.id = id;
         actualizar_datos();
     }
     public void actualizar_datos(){
-        int estatus = 0;
-        String sql = "SELECT * FROM cliente WHERE id = "+id;
-        try{
-                ///Concecta con la base de datos
-                Connection en = conexion.conectar();
-                   ///Crea la sentencia
-                Statement st = en.createStatement();
-                   ///Ejecuta la sentencia
-                ResultSet rs = st.executeQuery(sql);
-                if(rs.next()){
-                  jtName.setText(rs.getString("nombre"));
-                  jtLast.setText(rs.getString("apellido"));
-                  jtAge.setSelectedIndex(rs.getInt("edad"));
-                  switch(rs.getString("tipo_sangre")){
-                      case "A+":
-                          jtBlood.setSelectedIndex(1);
-                      break;
-                      case "A-":
-                          jtBlood.setSelectedIndex(2);
-                      break;
-                      case "B+":
-                          jtBlood.setSelectedIndex(3);
-                      break;
-                      case "B-":
-                          jtBlood.setSelectedIndex(4);
-                      break;
-                      case "O+":
-                          jtBlood.setSelectedIndex(5);
-                      break;
-                      case "O-":
-                          jtBlood.setSelectedIndex(6);
-                      break;
-                      case "AB+":
-                          jtBlood.setSelectedIndex(7);
-                      break;
-                      case "AB-":
-                          jtBlood.setSelectedIndex(8);
-                      break;
-                  }
-                  if(rs.getString("sexo") == "M"){
-                      jtSex.setSelectedIndex(1);
-                  }
-                  else{
-                      jtSex.setSelectedIndex(1);
-                  }
+        String sql = "SELECT * FROM cliente WHERE id = " + id;
+        try {
+            ///Concecta con la base de datos
+            Connection en = conexion.conectar();
+            ///Crea la sentencia
+            Statement st = en.createStatement();
+            ///Ejecuta la sentencia
+            ResultSet rs = st.executeQuery(sql);
+            if (rs.next()) {
+                jtName.setText(rs.getString("nombre"));
+                jtLast.setText(rs.getString("apellido"));
+                jtAge.setSelectedIndex(rs.getInt("edad"));
+                switch (rs.getString("tipo_sangre")) {
+                    case "A+":
+                        jtBlood.setSelectedIndex(1);
+                        break;
+                    case "A-":
+                        jtBlood.setSelectedIndex(2);
+                        break;
+                    case "B+":
+                        jtBlood.setSelectedIndex(3);
+                        break;
+                    case "B-":
+                        jtBlood.setSelectedIndex(4);
+                        break;
+                    case "O+":
+                        jtBlood.setSelectedIndex(5);
+                        break;
+                    case "O-":
+                        jtBlood.setSelectedIndex(6);
+                        break;
+                    case "AB+":
+                        jtBlood.setSelectedIndex(7);
+                        break;
+                    case "AB-":
+                        jtBlood.setSelectedIndex(8);
+                        break;
                 }
-            }catch(SQLException e){
-                    System.err.println("Error en el boton ingresar" + e);
-                    JOptionPane.showMessageDialog(null,"Error al iniciar sesion");
+                if (rs.getString("sexo") == "M") {
+                    jtSex.setSelectedIndex(1);
+                } else {
+                    jtSex.setSelectedIndex(1);
+                }
             }
-    
+        } catch (SQLException e) {
+            System.err.println("Error en el boton ingresar" + e);
+            JOptionPane.showMessageDialog(null, "Error al iniciar sesion");
+        }
     }
     
     @SuppressWarnings("unchecked")
@@ -92,7 +84,6 @@ public class modificar_cliente extends javax.swing.JFrame {
         jtBlood = new javax.swing.JComboBox<>();
         jtSex = new javax.swing.JComboBox<>();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
 
@@ -149,17 +140,6 @@ public class modificar_cliente extends javax.swing.JFrame {
         });
         getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 410, 140, 30));
 
-        jButton2.setBackground(new java.awt.Color(255, 51, 51));
-        jButton2.setForeground(new java.awt.Color(255, 255, 255));
-        jButton2.setText("Salir");
-        jButton2.setToolTipText("");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 410, 110, 30));
-
         jButton3.setBackground(new java.awt.Color(51, 51, 255));
         jButton3.setForeground(new java.awt.Color(255, 255, 255));
         jButton3.setText("Modificar");
@@ -179,56 +159,49 @@ public class modificar_cliente extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // Validamos que no esten vacios
-        if(jtName.getText().isEmpty() || jtLast.getText().isEmpty()||jtAge.getSelectedIndex() == 0|| jtBlood.getSelectedIndex() == 0||jtSex.getSelectedIndex() == 0){
-            JOptionPane.showMessageDialog(null,"Campos incompletos");
-        }else{
+        if (jtName.getText().isEmpty() || jtLast.getText().isEmpty() || jtAge.getSelectedIndex() == 0 || jtBlood.getSelectedIndex() == 0 || jtSex.getSelectedIndex() == 0) {
+            JOptionPane.showMessageDialog(null, "Campos incompletos");
+        } else {
             ///Definimos variables
-            String name,last,blood,sex;
+            String name, last, blood, sex;
             int age;
             ///Le asignamos valores
-            name    = jtName.getText();
-            last    = jtLast.getText();
-            blood   = jtBlood.getSelectedItem().toString();
-            age     = Integer.parseInt(jtAge.getSelectedItem().toString());
-            if(jtSex.getSelectedItem().toString() == "Masculino"){
+            name = jtName.getText();
+            last = jtLast.getText();
+            blood = jtBlood.getSelectedItem().toString();
+            age = Integer.parseInt(jtAge.getSelectedItem().toString());
+            if (jtSex.getSelectedItem().toString().equals("Masculino")) {
                 sex = "M";
+            } else {
+                sex = "F";
             }
-            else{
-                sex = "F";    
-             }
-             try{
-            ///Concecta con la base de datos
-            Connection en = conexion.conectar();
-            PreparedStatement ps = en.prepareStatement("Update cliente set nombre = ?, apellido = ?, edad = ?, tipo_sangre = ?, sexo = ? Where id = ?");
-                                                       
-            ps.setString(1,name);
-            ps.setString(2,last);
-            ps.setInt(3,age);
-            ps.setString(4,blood);
-            ps.setString(5,sex);
-            ps.setInt(6,id);
+            try {
+                ///Concecta con la base de datos
+                Connection en = conexion.conectar();
+                PreparedStatement ps = en.prepareStatement("Update cliente set nombre = ?, apellido = ?, edad = ?, tipo_sangre = ?, sexo = ? Where id = ?");
 
-            int res = ps.executeUpdate();
-            if(res == 0){
-                JOptionPane.showMessageDialog(null,"Nombre de usuario no valido");
-            }
-            else{
-                JOptionPane.showMessageDialog(null,"Usuario modificado con exito");
-                menu_cliente nuevo = new menu_cliente();
-                nuevo.setVisible(true);
-                this.dispose();
-            }
-            }catch(SQLException e){
+                ps.setString(1, name);
+                ps.setString(2, last);
+                ps.setInt(3, age);
+                ps.setString(4, blood);
+                ps.setString(5, sex);
+                ps.setInt(6, id);
+
+                int res = ps.executeUpdate();
+                if (res == 0) {
+                    JOptionPane.showMessageDialog(null, "Nombre de usuario no valido");
+                } else {
+                    JOptionPane.showMessageDialog(null, "Usuario modificado con exito");
+                    menu_cliente nuevo = new menu_cliente();
+                    nuevo.setVisible(true);
+                    this.dispose();
+                }
+            } catch (SQLException e) {
                 System.err.println("Error en el boton ingresar" + e);
-               JOptionPane.showMessageDialog(null,"id de cliente no valido");
+                JOptionPane.showMessageDialog(null, "id de cliente no valido");
             }
         }
     }//GEN-LAST:event_jButton3ActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // Cerrar Programa
-        System.exit(0);
-    }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         menu_cliente nuevo = new menu_cliente();
@@ -264,16 +237,13 @@ public class modificar_cliente extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new modificar_cliente(0).setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new modificar_cliente(0).setVisible(true);
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

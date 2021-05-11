@@ -1,9 +1,6 @@
 
-
 package sg.c;
 
-import java.sql.*;
-import conexion.conexion;
 import javax.swing.JOptionPane;
 
 public class buscador_sucursal extends javax.swing.JFrame {
@@ -13,9 +10,9 @@ public class buscador_sucursal extends javax.swing.JFrame {
     public buscador_sucursal() {
         initComponents();
         ///Definimos un titulo para la ventana
-        setTitle("Buscar sucursal");
+        this.setTitle("Buscar sucursal");
         ///Colocamos la ventana en medio de la panatalla
-        setLocationRelativeTo(null);
+        this.setLocationRelativeTo(null);
     }
 
     @SuppressWarnings("unchecked")
@@ -27,7 +24,6 @@ public class buscador_sucursal extends javax.swing.JFrame {
         jtName = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -41,7 +37,7 @@ public class buscador_sucursal extends javax.swing.JFrame {
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 30, -1, -1));
 
         jLabel2.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
-        jLabel2.setText(" Escriba el nombre de la sucursal");
+        jLabel2.setText(" Escriba el código de la sucursal");
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 160, -1, -1));
         getContentPane().add(jtName, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 210, 300, 30));
 
@@ -63,27 +59,12 @@ public class buscador_sucursal extends javax.swing.JFrame {
         });
         getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 410, 180, 30));
 
-        jButton2.setBackground(new java.awt.Color(255, 51, 51));
-        jButton2.setForeground(new java.awt.Color(255, 255, 255));
-        jButton2.setText("Salir");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 410, 110, 30));
-
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/fondo.jpg"))); // NOI18N
         jLabel4.setText("jLabel4");
         getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        //Cerrar Programa
-        System.exit(0);
-    }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         menu_sucursal nuevo = new menu_sucursal();
@@ -92,41 +73,44 @@ public class buscador_sucursal extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
-        if(jtName.getText().isEmpty()){
-           JOptionPane.showMessageDialog(null,"Ingrese un nombre");
-       }else{
-            if(mode == 1){
-                Sucursal s = new Sucursal();
-                String buscador = s.Search(jtName.getText());
-                if(!buscador.equals("n")){
-                    new modificar_sucursal(jtName.getText()).setVisible(true);
-                    this.dispose();
+        if (jtName.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Ingrese un nombre");
+        } else {
+            switch (mode) {
+                case 1: {
+                    Sucursal s = new Sucursal();
+                    String buscador = s.Search(jtName.getText());
+                    if (!buscador.equals("n")) {
+                        new modificar_sucursal(jtName.getText()).setVisible(true);
+                        this.dispose();
+                    }
+                    break;
                 }
-            } else if(mode == 2){
-                Sucursal s = new Sucursal();
-                int estatus = 0, delete = 1;
-                String search = jtName.getText();
-                s.Delete(estatus, search, delete);
-                new menu_sucursal().setVisible(true);
-                this.dispose();
-            } else {
-                JOptionPane.showMessageDialog(null,"Error");
+                case 2: {
+                    Sucursal s = new Sucursal();
+                    int estatus = 0, delete = 1;
+                    String search = jtName.getText();
+                    s.Delete(estatus, search, delete);
+                    new menu_sucursal().setVisible(true);
+                    this.dispose();
+                    break;
+                }
+                default:
+                    JOptionPane.showMessageDialog(null, "Error");
+                    break;
             }
-       }
+        }
     }//GEN-LAST:event_jLabel3MouseClicked
 
     public static void main(String args[]) {
 
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new buscador_sucursal().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new buscador_sucursal().setVisible(true);
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

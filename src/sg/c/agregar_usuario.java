@@ -10,28 +10,28 @@ public class agregar_usuario extends javax.swing.JFrame {
     public agregar_usuario() {
         initComponents();
         ///Definimos n titulo para la ventana
-        setTitle("Agregar usuario");
+        this.setTitle("Agregar usuario");
         ///Colocamos la ventana en medio de la panatalla
-        setLocationRelativeTo(null);
-        rellenarSucursales();
+        this.setLocationRelativeTo(null);
+        this.rellenarSucursales();
     }
     public void rellenarSucursales(){
         String sql = "Select direccion From sucursal";
-        try{
-                ///Concecta con la base de datos
-                Connection en = conexion.conectar();
-                   ///Crea la sentencia
-                Statement st = en.createStatement();
-                   ///Ejecuta la sentencia
-                ResultSet rs = st.executeQuery(sql);
-                while(rs.next()){
-                    jcCombo.addItem(rs.getString("direccion"));
-                    
-                }
-            }catch(SQLException e){
-                    System.err.println("Error en el boton ingresar" + e);
-                    JOptionPane.showMessageDialog(null,"Error al iniciar sesion");
+        try {
+            ///Concecta con la base de datos
+            Connection en = conexion.conectar();
+            ///Crea la sentencia
+            Statement st = en.createStatement();
+            ///Ejecuta la sentencia
+            ResultSet rs = st.executeQuery(sql);
+            while (rs.next()) {
+                jcCombo.addItem(rs.getString("direccion"));
+
             }
+        } catch (SQLException e) {
+            System.err.println("Error en el boton ingresar" + e);
+            JOptionPane.showMessageDialog(null, "Error al iniciar sesion");
+        }
     }
 
     @SuppressWarnings("unchecked")
@@ -50,7 +50,6 @@ public class agregar_usuario extends javax.swing.JFrame {
         jtPhone = new javax.swing.JTextField();
         jcType = new javax.swing.JComboBox<>();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jtName = new javax.swing.JTextField();
         jtLast = new javax.swing.JTextField();
@@ -119,16 +118,6 @@ public class agregar_usuario extends javax.swing.JFrame {
         });
         getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 420, 170, 40));
 
-        jButton2.setBackground(new java.awt.Color(255, 51, 51));
-        jButton2.setForeground(new java.awt.Color(255, 255, 255));
-        jButton2.setText("Salir");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 420, 110, 40));
-
         jButton3.setBackground(new java.awt.Color(51, 51, 255));
         jButton3.setForeground(new java.awt.Color(255, 255, 255));
         jButton3.setText("Agregar");
@@ -168,40 +157,35 @@ public class agregar_usuario extends javax.swing.JFrame {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
        
          ///Validamos que todas las variables no esten vacias
-        if(jtName.getText().isEmpty() ||jtLast.getText().isEmpty()||jtUser.getText().isEmpty()||jtPass.getText().isEmpty()|| jcType.getSelectedIndex() == 0 || jcCombo.getSelectedIndex() == 0){
-            JOptionPane.showMessageDialog(null,"Campos incompletos");
-        }
-        else{
+        if (jtName.getText().isEmpty() || jtLast.getText().isEmpty() || jtUser.getText().isEmpty() || jtPass.getText().isEmpty() || jcType.getSelectedIndex() == 0 || jcCombo.getSelectedIndex() == 0) {
+            JOptionPane.showMessageDialog(null, "Campos incompletos");
+        } else {
             int phone, type, status = 0;
-            String name,last,user,pass,sucursal;
-            phone   = Integer.parseInt(jtPhone.getText());
-            type    = jcType.getSelectedIndex();
-            name    = jtName.getText();
-            last    = jtLast.getText();
-            user    = jtUser.getText();
-            pass    = jtPass.getText();
-            sucursal= jcCombo.getSelectedItem().toString();jtUser.getText();
-            pass    = jtPass.getText();
-            try{
+            String name, last, user, pass, sucursal;
+            phone = Integer.parseInt(jtPhone.getText());
+            type = jcType.getSelectedIndex();
+            name = jtName.getText();
+            last = jtLast.getText();
+            user = jtUser.getText();
+            pass = jtPass.getText();
+            sucursal = jcCombo.getSelectedItem().toString();
+            jtUser.getText();
+            pass = jtPass.getText();
+            try {
                 Connection en = conexion.conectar();
-                PreparedStatement ps = en.prepareStatement("SELECT numero FROM sucursal WHERE direccion = '"+jcCombo.getSelectedItem().toString()+"'");
+                PreparedStatement ps = en.prepareStatement("SELECT numero FROM sucursal WHERE direccion = '" + jcCombo.getSelectedItem().toString() + "'");
                 ResultSet rs = ps.executeQuery();
-                if(rs.next()){
+                if (rs.next()) {
                     String suc = rs.getString("numero");
                     Usuario u = new Usuario();
                     u.Add(phone, type, status, name, last, user, pass, suc);
                     this.dispose();
                 }
-            } catch(SQLException e){
-                JOptionPane.showMessageDialog(null,"Error de conexion: "+e);
+            } catch (SQLException e) {
+                JOptionPane.showMessageDialog(null, "Error de conexion: " + e);
             }
         }
     }//GEN-LAST:event_jButton3ActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // Cerrar programa
-        System.exit(0);
-    }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         menu_usuario nuevo = new menu_usuario();
@@ -221,16 +205,13 @@ public class agregar_usuario extends javax.swing.JFrame {
 
     public static void main(String args[]) {
 
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new agregar_usuario().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new agregar_usuario().setVisible(true);
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;

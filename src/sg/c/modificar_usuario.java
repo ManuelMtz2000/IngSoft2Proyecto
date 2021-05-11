@@ -11,82 +11,81 @@ public class modificar_usuario extends javax.swing.JFrame {
     public modificar_usuario() {
         initComponents();
         ///Definimos n titulo para la ventana
-        setTitle("Editar usuario");
+        this.setTitle("Editar usuario");
         ///Colocamos la ventana en medio de la panatalla
-        setLocationRelativeTo(null);
+        this.setLocationRelativeTo(null);
         rellenarComboBox();
         rellenarDatos();
 
     }
     public void rellenarComboBox(){
         String sql = "Select direccion From sucursal";
-        try{
-                ///Concecta con la base de datos
-                Connection en = conexion.conectar();
-                   ///Crea la sentencia
-                Statement st = en.createStatement();
-                   ///Ejecuta la sentencia
-                ResultSet rs = st.executeQuery(sql);
-                while(rs.next()){
-                    jComboBox1.addItem(rs.getString("direccion"));
-                    
-                }
-            }catch(SQLException e){
-                    System.err.println("Error en el boton ingresar" + e);
-                    JOptionPane.showMessageDialog(null,"Error al iniciar sesion");
+        try {
+            ///Concecta con la base de datos
+            Connection en = conexion.conectar();
+            ///Crea la sentencia
+            Statement st = en.createStatement();
+            ///Ejecuta la sentencia
+            ResultSet rs = st.executeQuery(sql);
+            while (rs.next()) {
+                jComboBox1.addItem(rs.getString("direccion"));
+
             }
+        } catch (SQLException e) {
+            System.err.println("Error en el boton ingresar" + e);
+            JOptionPane.showMessageDialog(null, "Error al iniciar sesion");
+        }
     }
     public void rellenarDatos(){
-         String sql = "Select * From usuario where usuario = '"+user_name+"'";
-        try{
-                ///Concecta con la base de datos
-                Connection en = conexion.conectar();
-                   ///Crea la sentencia
-                Statement st = en.createStatement();
-                   ///Ejecuta la sentencia
-                ResultSet rs = st.executeQuery(sql);
-                if(rs.next()){
-                  String sucursal = rs.getString("sucursal");
-                  jtName.setText(rs.getString("nombre"));
-                  jtLast.setText(rs.getString("apellido"));
-                  jtUser.setText(rs.getString("usuario"));
-                  jtPass.setText(rs.getString("contrasena"));
-                  jtPhone.setText(rs.getString("telefono"));
-                  if(rs.getInt("tipo") == 1){
-                      jtType.setSelectedIndex(1);
-                  }
-                  else{
-                      jtType.setSelectedIndex(2);
-                  }
+        String sql = "Select * From usuario where usuario = '" + user_name + "'";
+        try {
+            ///Concecta con la base de datos
+            Connection en = conexion.conectar();
+            ///Crea la sentencia
+            Statement st = en.createStatement();
+            ///Ejecuta la sentencia
+            ResultSet rs = st.executeQuery(sql);
+            if (rs.next()) {
+                String sucursal = rs.getString("sucursal");
+                jtName.setText(rs.getString("nombre"));
+                jtLast.setText(rs.getString("apellido"));
+                jtUser.setText(rs.getString("usuario"));
+                jtPass.setText(rs.getString("contrasena"));
+                jtPhone.setText(rs.getString("telefono"));
+                if (rs.getInt("tipo") == 1) {
+                    jtType.setSelectedIndex(1);
+                } else {
+                    jtType.setSelectedIndex(2);
+                }
                 String opcion;
-                try{
+                try {
                     Connection en1 = conexion.conectar();
-                    PreparedStatement ps = en1.prepareStatement("SELECT direccion FROM sucursal WHERE numero = '"+sucursal+"'");
+                    PreparedStatement ps = en1.prepareStatement("SELECT direccion FROM sucursal WHERE numero = '" + sucursal + "'");
                     ResultSet rs1 = ps.executeQuery();
-                    if(rs1.next()){
+                    if (rs1.next()) {
                         String suc = rs1.getString("direccion");
-                            JOptionPane.showMessageDialog(null, suc);
-                        for(int i = 0; i < jComboBox1.getItemCount(); i++){
+                        JOptionPane.showMessageDialog(null, suc);
+                        for (int i = 0; i < jComboBox1.getItemCount(); i++) {
                             jComboBox1.setSelectedIndex(i);
                             opcion = jComboBox1.getSelectedItem().toString();
-                            if(opcion.equals(suc)){
+                            if (opcion.equals(suc)) {
                                 jComboBox1.setSelectedIndex(i);
                                 break;
                             }
                         }
                         this.dispose();
                     } else {
-                        JOptionPane.showMessageDialog(null,"Jajaj");
+                        JOptionPane.showMessageDialog(null, "Jajaj");
                     }
-                } catch(SQLException e){
-                    JOptionPane.showMessageDialog(null,"Error de conexion: "+e);
+                } catch (SQLException e) {
+                    JOptionPane.showMessageDialog(null, "Error de conexion: " + e);
                 }
-                
-                }
-            }catch(SQLException e){
-                    System.err.println("Error en el boton ingresar" + e);
-                    JOptionPane.showMessageDialog(null,"Error al iniciar sesion");
+
             }
+        } catch (SQLException e) {
+            System.err.println("Error en el boton ingresar" + e);
+            JOptionPane.showMessageDialog(null, "Error al iniciar sesion");
+        }
     }
 
     @SuppressWarnings("unchecked")
@@ -108,7 +107,6 @@ public class modificar_usuario extends javax.swing.JFrame {
         jtPass = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
         jComboBox1 = new javax.swing.JComboBox<>();
         jtType = new javax.swing.JComboBox<>();
         jLabel9 = new javax.swing.JLabel();
@@ -176,16 +174,6 @@ public class modificar_usuario extends javax.swing.JFrame {
         });
         getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(537, 420, 140, 30));
 
-        jButton3.setBackground(new java.awt.Color(255, 51, 51));
-        jButton3.setForeground(new java.awt.Color(255, 255, 255));
-        jButton3.setText("Salir");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 420, 110, 30));
-
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar" }));
         getContentPane().add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 290, 110, 30));
 
@@ -199,11 +187,6 @@ public class modificar_usuario extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        //Cerrar Programa
-        System.exit(0);
-    }//GEN-LAST:event_jButton3ActionPerformed
-
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         menu_usuario nuevo = new menu_usuario();
         nuevo.setVisible(true);
@@ -211,65 +194,60 @@ public class modificar_usuario extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-       ///Validamos que todas las variables no esten vacias
-        if(jtName.getText().isEmpty() ||jtLast.getText().isEmpty()||jtUser.getText().isEmpty()||jtPass.getText().isEmpty()|| jtType.getSelectedIndex() == 0 || jComboBox1.getSelectedIndex() == 0){
-            JOptionPane.showMessageDialog(null,"Campos incompletos");
-        }
-        else{
+        ///Validamos que todas las variables no esten vacias
+        if (jtName.getText().isEmpty() || jtLast.getText().isEmpty() || jtUser.getText().isEmpty() || jtPass.getText().isEmpty() || jtType.getSelectedIndex() == 0 || jComboBox1.getSelectedIndex() == 0) {
+            JOptionPane.showMessageDialog(null, "Campos incompletos");
+        } else {
             int phone, type;
-            String name,last,user,pass,sucursal;
-            phone   = Integer.parseInt(jtPhone.getText());
-            type    = jtType.getSelectedIndex();
-            name    = jtName.getText();
-            last    = jtLast.getText();
-            user    = jtUser.getText();
-            pass    = jtPass.getText();
-            sucursal= jComboBox1.getSelectedItem().toString();
+            String name, last, user, pass, sucursal;
+            phone = Integer.parseInt(jtPhone.getText());
+            type = jtType.getSelectedIndex();
+            name = jtName.getText();
+            last = jtLast.getText();
+            user = jtUser.getText();
+            pass = jtPass.getText();
+            sucursal = jComboBox1.getSelectedItem().toString();
             //Ingresamos los datos a la base de datos 
-            try{
-                    ///Concecta con la base de datos
-            Connection en = conexion.conectar();
-            PreparedStatement ps = en.prepareStatement("Update usuario set nombre = ?,apellido = ? ,usuario = ?, contrasena = ?, sucursal = ? ,telefono = ?,tipo = ? Where usuario = ? ");
-            ps.setString(1,name);
-            ps.setString(2,last);
-            ps.setString(3,user);
-            ps.setString(4,pass);
-            ps.setString(5,sucursal);
-            ps.setInt(6,phone);
-            ps.setInt(7,type);
-            ps.setString(8,user_name);
+            try {
+                ///Concecta con la base de datos
+                Connection en = conexion.conectar();
+                PreparedStatement ps = en.prepareStatement("Update usuario set nombre = ?,apellido = ? ,usuario = ?, contrasena = ?, sucursal = ? ,telefono = ?,tipo = ? Where usuario = ? ");
+                ps.setString(1, name);
+                ps.setString(2, last);
+                ps.setString(3, user);
+                ps.setString(4, pass);
+                ps.setString(5, sucursal);
+                ps.setInt(6, phone);
+                ps.setInt(7, type);
+                ps.setString(8, user_name);
 
-            int res = ps.executeUpdate();
-            if(res == 0){
-                JOptionPane.showMessageDialog(null,"Nombre de usuario no valido");
-            }
-            else{
-                JOptionPane.showMessageDialog(null,"Usuario modificado con exito");
-                menu_usuario nuevo = new menu_usuario();
-                nuevo.setVisible(true);
-                this.dispose();
-            }
-            }catch(SQLException e){
+                int res = ps.executeUpdate();
+                if (res == 0) {
+                    JOptionPane.showMessageDialog(null, "Nombre de usuario no valido");
+                } else {
+                    JOptionPane.showMessageDialog(null, "Usuario modificado con exito");
+                    menu_usuario nuevo = new menu_usuario();
+                    nuevo.setVisible(true);
+                    this.dispose();
+                }
+            } catch (SQLException e) {
                 System.err.println("Error en el boton ingresar" + e);
-               JOptionPane.showMessageDialog(null,"Nombre de usuario no valido");
-               jtUser.setText("");
+                JOptionPane.showMessageDialog(null, "Nombre de usuario no valido");
+                jtUser.setText("");
             }
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     public static void main(String args[]) {
 
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new modificar_usuario().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new modificar_usuario().setVisible(true);
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

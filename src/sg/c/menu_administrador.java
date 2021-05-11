@@ -8,9 +8,9 @@ public class menu_administrador extends javax.swing.JFrame {
     public menu_administrador() {
         initComponents();
         ///Definimos n titulo para la ventana
-        setTitle("Menu administración");
+        this.setTitle("Menu administración");
         ///Colocamos la ventana en medio de la panatalla
-        setLocationRelativeTo(null);
+        this.setLocationRelativeTo(null);
     }
 
     @SuppressWarnings("unchecked")
@@ -21,7 +21,6 @@ public class menu_administrador extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
@@ -64,16 +63,6 @@ public class menu_administrador extends javax.swing.JFrame {
         });
         getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 150, -1, -1));
 
-        jButton2.setBackground(new java.awt.Color(255, 0, 0));
-        jButton2.setForeground(new java.awt.Color(255, 255, 255));
-        jButton2.setText("Salir");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 410, 110, 40));
-
         jLabel5.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         jLabel5.setText("Usuarios");
         getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 260, -1, -1));
@@ -114,22 +103,14 @@ public class menu_administrador extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jLabel4MouseClicked
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        ///Cerrar programa 
-        System.exit(0);
-    }//GEN-LAST:event_jButton2ActionPerformed
-
     public static void main(String args[]) {
 
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new menu_administrador().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new menu_administrador().setVisible(true);
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

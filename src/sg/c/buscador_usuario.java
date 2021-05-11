@@ -1,9 +1,7 @@
 
 package sg.c;
 
-import java.sql.*;
 import javax.swing.JOptionPane;
-import conexion.conexion;
 
 public class buscador_usuario extends javax.swing.JFrame {
     
@@ -13,9 +11,9 @@ public class buscador_usuario extends javax.swing.JFrame {
     public buscador_usuario() {
         initComponents();
         ///Definimos n titulo para la ventana
-        setTitle("Buscar usuario");
+        this.setTitle("Buscar usuario");
         ///Colocamos la ventana en medio de la panatalla
-        setLocationRelativeTo(null);
+        this.setLocationRelativeTo(null);
     }
 
     @SuppressWarnings("unchecked")
@@ -27,7 +25,6 @@ public class buscador_usuario extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jtUser = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -66,27 +63,12 @@ public class buscador_usuario extends javax.swing.JFrame {
         });
         getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 390, 140, 40));
 
-        jButton2.setBackground(new java.awt.Color(255, 0, 0));
-        jButton2.setForeground(new java.awt.Color(255, 255, 255));
-        jButton2.setText("Salir");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 400, 110, 40));
-
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/fondo.jpg"))); // NOI18N
         jLabel4.setText("jLabel4");
         getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // Cerar programa
-        System.exit(0);
-    }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
        menu_usuario nuevo = new menu_usuario();
@@ -95,42 +77,45 @@ public class buscador_usuario extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
-       if(jtUser.getText().isEmpty()){
-           JOptionPane.showMessageDialog(null,"Ingrese un usuario");
-       }else{
-           if(mode == 1){
-               Usuario u = new Usuario();
-               String search = u.Search(jtUser.getText());
-               if(!search.equals("n")){
-                   user_name = search;
-                   new modificar_usuario().setVisible(true);
-                   this.dispose();
-               }
-           } else if(mode == 2){
-               Usuario u = new Usuario();
-               int estatus = 0, delete = 1;
-               String search = u.Search(jtUser.getText());
-               u.Delete(estatus, search, delete);
-               new menu_usuario().setVisible(true);
-               this.dispose();
-           } else {
-               JOptionPane.showMessageDialog(null,"Error");
-           }
-       }
+        if (jtUser.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Ingrese un usuario");
+        } else {
+            switch (mode) {
+                case 1: {
+                    Usuario u = new Usuario();
+                    String search = u.Search(jtUser.getText());
+                    if (!search.equals("n")) {
+                        user_name = search;
+                        new modificar_usuario().setVisible(true);
+                        this.dispose();
+                    }
+                    break;
+                }
+                case 2: {
+                    Usuario u = new Usuario();
+                    int estatus = 0, delete = 1;
+                    String search = u.Search(jtUser.getText());
+                    u.Delete(estatus, search, delete);
+                    new menu_usuario().setVisible(true);
+                    this.dispose();
+                    break;
+                }
+                default:
+                    JOptionPane.showMessageDialog(null, "Error");
+                    break;
+            }
+        }
     }//GEN-LAST:event_jLabel2MouseClicked
 
     public static void main(String args[]) {
 
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new buscador_usuario().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new buscador_usuario().setVisible(true);
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
