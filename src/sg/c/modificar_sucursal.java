@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
 package sg.c;
 
@@ -14,16 +9,17 @@ public class modificar_sucursal extends javax.swing.JFrame {
 
     String user = buscador_sucursal.name;
     
-    public modificar_sucursal() {
+    public modificar_sucursal(String user) {
         initComponents();
         ///Definimos un titulo para la ventana
         setTitle("Modificar sucursal");
         ///Colocamos la ventana en medio de la panatalla
         setLocationRelativeTo(null);
+        this.user = user;
         rellenarDatos();
     }
     public void rellenarDatos(){
-         String sql = "Select * From sucursal where nombre = '"+user+"'";
+         String sql = "Select * From sucursal where numero = '"+user+"'";
         try{
                 ///Concecta con la base de datos
                 Connection en = conexion.conectar();
@@ -32,7 +28,7 @@ public class modificar_sucursal extends javax.swing.JFrame {
                    ///Ejecuta la sentencia
                 ResultSet rs = st.executeQuery(sql);
                 if(rs.next()){
-                  jtName.setText(rs.getString("nombre"));
+                  jtName.setText(rs.getString("numero"));
                   jtPlace.setText(rs.getString("direccion"));
                   jtPhone.setText(rs.getString("telefono"));
                   switch(rs.getString("apertura")){
@@ -198,7 +194,7 @@ public class modificar_sucursal extends javax.swing.JFrame {
             try{
                     ///Concecta con la base de datos
             Connection en = conexion.conectar();
-            PreparedStatement ps = en.prepareStatement("Update sucursal set numero = ?, direccion = ?, telefono = ?, apertura = ?, cierre = ? Where nombre = ?");
+            PreparedStatement ps = en.prepareStatement("Update sucursal set numero = ?, direccion = ?, telefono = ?, apertura = ?, cierre = ? Where numero = ?");
             ps.setString(1,name);
             ps.setString(2,place);
             ps.setInt(3,phone);
@@ -225,37 +221,11 @@ public class modificar_sucursal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(modificar_sucursal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(modificar_sucursal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(modificar_sucursal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(modificar_sucursal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
 
-        /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new modificar_sucursal().setVisible(true);
+                new modificar_sucursal("").setVisible(true);
             }
         });
     }

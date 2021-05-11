@@ -5,6 +5,10 @@
  */
 package sg.c;
 
+import java.sql.*;
+import conexion.conexion;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Manue
